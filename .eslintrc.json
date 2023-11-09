@@ -1,23 +1,46 @@
 {
-    "extends": ["airbnb", "prettier"],
-    "env": {
-        "browser": true,
-        "node": true,
-        "jest": true
-    },
-    "parserOptions": {
-        "ecmaVersion": 11,
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "impliedStrict": true,
-            "classes": true
-        }
-    },
-    "plugins": [
-        "prettier"
-    ],
-    "rules": {
-        "semi": [2, "always"],
-        "prettier/prettier": "error"
+  "extends": [
+    "airbnb",
+    "prettier"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 11,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "impliedStrict": true,
+      "classes": true
     }
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "rules": {
+    "semi": [
+      2,
+      "always"
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "indentSize": 2,
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    ],
+    "consistent-return": "off",
+    "indent": [
+      "warn",
+      2
+    ],
+    "indent-legacy": [
+      "warn",
+      2
+    ],
+    "import/no-extraneous-dependencies": "off"
+  }
 }
