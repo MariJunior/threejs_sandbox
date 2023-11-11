@@ -2,10 +2,29 @@ import debounce from 'lodash/debounce';
 import * as THREE from 'three';
 import TWEEN from 'three/examples/jsm/libs/tween.module';
 import init from './init';
+import {
+	materialBark,
+	materialDoorWood,
+	materialGlassStained,
+	materialGlassWindow,
+	materialPaperWrinkled,
+	materialSapphire,
+	materialSkinLizard,
+	materialStylizedFur,
+	materialTiles,
+} from './textures';
 
 import './style.css';
 
 const { sizes, camera, scene, canvas, controls, renderer, stats, gui } = init();
+
+const lightColor = 0xffffff;
+const lightIntensity = 4;
+const light = new THREE.AmbientLight(lightColor, lightIntensity);
+
+scene.add(light);
+
+scene.background = new THREE.Color(0x004537);
 
 camera.position.z = 22;
 
@@ -14,7 +33,7 @@ const figuresGroup = new THREE.Group();
 const GEOMETRIES = [
   new THREE.BoxGeometry(1, 1, 1),
   new THREE.ConeGeometry(1, 2, 16, 4),
-  new THREE.CylinderGeometry(0.75, 1, 2, 16, 4),
+  new THREE.CylinderGeometry(0.75, 1, 2.25, 16, 4),
   new THREE.TetrahedronGeometry(1, 0),
   new THREE.TorusGeometry(1, 0.5, 16, 100),
   new THREE.TorusKnotGeometry(1, 0.25, 100, 16, 1, 5),
@@ -23,7 +42,19 @@ const GEOMETRIES = [
   new THREE.SphereGeometry(1, 32, 16),
 ];
 
-const COLORS = [0x53e0a7, 0xec933b, 0xd5a5ff, 0xa5ffa8, 0xfaffa5];
+const TEXTURES = [
+  materialDoorWood,
+  materialBark,
+  materialGlassStained,
+  materialPaperWrinkled,
+  materialSkinLizard,
+  materialGlassWindow,
+  materialSapphire,
+  materialTiles,
+  materialStylizedFur,
+];
+
+// const COLORS = [0x53e0a7, 0xec933b, 0xd5a5ff, 0xa5ffa8, 0xfaffa5];
 
 let geometryIndex = 0;
 let activeIndex = -1;
@@ -31,16 +62,10 @@ let activeIndex = -1;
 // Создаём и заполняем сетку из массива заданных геометрий
 for (let i = -5; i <= 5; i += 5) {
   for (let j = -5; j <= 5; j += 5) {
-    const parameters = {
-      color: 'gray',
-    };
-
-    const material = new THREE.MeshBasicMaterial({
-      color: parameters.color,
-      wireframe: true,
-    });
-
-    const mesh = new THREE.Mesh(GEOMETRIES[geometryIndex], material);
+    const mesh = new THREE.Mesh(
+      GEOMETRIES[geometryIndex],
+      TEXTURES[geometryIndex],
+    );
     const geometryType = GEOMETRIES[geometryIndex].type;
 
     const figureGUIFolder = gui.addFolder(
@@ -60,14 +85,9 @@ for (let i = -5; i <= 5; i += 5) {
       .max(4)
       .step(0.25)
       .name('Scale y');
-    figureGUIFolder.add(mesh.material, 'wireframe').name('Is wireframed?');
-    figureGUIFolder
-      .addColor(parameters, 'color')
-      .onChange(() => {
-        material.color.set(parameters.color);
-      })
-      .name('Color');
+
     mesh.position.set(i, j, 10);
+    mesh.geometry.attributes.uv2 = mesh.geometry.attributes.uv;
     mesh.currentIndex = geometryIndex;
     mesh.basicPosition = new THREE.Vector3(i, j, 10);
     figuresGroup.add(mesh);
@@ -79,13 +99,13 @@ for (let i = -5; i <= 5; i += 5) {
 scene.add(figuresGroup);
 
 const resetActiveFigure = () => {
-  figuresGroup.children[activeIndex].material.color.set('gray');
+  // figuresGroup.children[activeIndex].material.color.set('gray');
   // При помощи GSAP анимируем приближение выбранной фигуры
   new TWEEN.Tween(figuresGroup.children[activeIndex].position)
     .to(
     {
       x: figuresGroup.children[activeIndex].basicPosition.x,
-      y: figuresGroup.children[activeIndex].basicPosition.y,
+        y: figuresGroup.children[activeIndex].basicPosition.y,
       z: figuresGroup.children[activeIndex].basicPosition.z,
     },
       Math.random() * 1000 + 500,
@@ -137,7 +157,7 @@ const handleFigureClick = (event) => {
   if (activeIndex !== -1) resetActiveFigure();
 
   figuresClickIntersections.forEach((figure) => {
-    figure.object.material.color.set(COLORS[Math.floor(Math.random() * 4 + 1)]);
+    // figure.object.material.color.set(COLORS[Math.floor(Math.random() * 4 + 1)]);
 
     activeIndex = figure.object.currentIndex;
 
@@ -146,7 +166,7 @@ const handleFigureClick = (event) => {
       .to(
       {
         x: 0,
-          y: 0,
+        y: 0,
         z: 18,
       },
         Math.random() * 1000 + 500,
