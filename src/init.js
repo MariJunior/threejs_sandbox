@@ -1,19 +1,19 @@
-import * as dat from 'lil-gui';
-import Stats from 'stats.js';
-import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import * as dat from "lil-gui";
+import Stats from "stats.js";
+import { PerspectiveCamera, Scene, WebGLRenderer } from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 const init = () => {
-  const canvas = document.getElementById('threejs-canvas');
+  const canvas = document.getElementById("threejs-canvas");
 
   const sizes = {
     width: window.innerWidth,
     height: window.innerHeight,
   };
 
-  const scene = new THREE.Scene();
+  const scene = new Scene();
 
-  const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
+  const camera = new PerspectiveCamera(75, sizes.width / sizes.height);
   scene.add(camera);
 
   const controls = new OrbitControls(camera, canvas);
@@ -26,7 +26,7 @@ const init = () => {
 
   const gui = new dat.GUI({ closeFolders: true });
 
-  const renderer = new THREE.WebGLRenderer({ canvas });
+  const renderer = new WebGLRenderer({ canvas });
   renderer.setSize(sizes.width, sizes.height);
   renderer.render(scene, camera);
 

@@ -24,20 +24,16 @@
       2,
       "always"
     ],
-    "prettier/prettier": [
-      "error",
-      {
-        "indentSize": 2,
-        "tabWidth": 2,
-        "useTabs": false
-      }
-    ],
+    "quotes": ["warn", "double"],
+    "comma-dangle": ["warn", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "never",
+      "exports": "always-multiline",
+      "functions": "always-multiline"
+    }],
     "consistent-return": "off",
     "indent": [
-      "warn",
-      2
-    ],
-    "indent-legacy": [
       "warn",
       2
     ],

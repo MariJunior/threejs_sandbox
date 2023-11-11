@@ -1,8 +1,4 @@
-import {
-  MeshStandardMaterial,
-  SRGBColorSpace,
-  TextureLoader
-} from 'three';
+import { MeshStandardMaterial, SRGBColorSpace, TextureLoader } from "three";
 
 function createMaterial({
   colorMapUrl,
@@ -49,98 +45,98 @@ function createMaterial({
 }
 
 const materialBark = createMaterial({
-  colorMapUrl: '/textures/bark/bark-BaseColor.jpg',
+  colorMapUrl: "/textures/bark/bark-BaseColor.jpg",
   alphaMapUrl: null,
-  ambientOcclusionUrl: '/textures/bark/bark-AmbientOcclusion.jpg',
-  heightMapUrl: '/textures/bark/bark-Height.png',
+  ambientOcclusionUrl: "/textures/bark/bark-AmbientOcclusion.jpg",
+  heightMapUrl: "/textures/bark/bark-Height.png",
   metallicMapUrl: null,
-  normalMapUrl: '/textures/bark/bark-Normal.jpg',
-  roughnessMapUrl: '/textures/bark/bark-Roughness.jpg',
+  normalMapUrl: "/textures/bark/bark-Normal.jpg",
+  roughnessMapUrl: "/textures/bark/bark-Roughness.jpg",
 });
 
 const materialDoorWood = createMaterial({
-  colorMapUrl: '/textures/door-wood/door-wood-basecolor.jpg',
-  alphaMapUrl: '/textures/door-wood/door-wood-opacity.jpg',
-  ambientOcclusionUrl: '/textures/door-wood/door-wood-ambientOcclusion.jpg',
-  heightMapUrl: '/textures/door-wood/door-wood-height.png',
-  metallicMapUrl: '/textures/door-wood/door-wood-metallic.jpg',
-  normalMapUrl: '/textures/door-wood/door-wood-normal.jpg',
-  roughnessMapUrl: '/textures/door-wood/door-wood-roughness.jpg',
+  colorMapUrl: "/textures/door-wood/door-wood-basecolor.jpg",
+  alphaMapUrl: "/textures/door-wood/door-wood-opacity.jpg",
+  ambientOcclusionUrl: "/textures/door-wood/door-wood-ambientOcclusion.jpg",
+  heightMapUrl: "/textures/door-wood/door-wood-height.png",
+  metallicMapUrl: "/textures/door-wood/door-wood-metallic.jpg",
+  normalMapUrl: "/textures/door-wood/door-wood-normal.jpg",
+  roughnessMapUrl: "/textures/door-wood/door-wood-roughness.jpg",
 });
 
 const materialGlassStained = createMaterial({
-  colorMapUrl: '/textures/glass-stained/glass-stained-basecolor.jpg',
-  alphaMapUrl: '/textures/glass-stained/glass-stained-Glass.jpg',
+  colorMapUrl: "/textures/glass-stained/glass-stained-basecolor.jpg",
+  alphaMapUrl: "/textures/glass-stained/glass-stained-Glass.jpg",
   ambientOcclusionUrl:
-    '/textures/glass-stained/glass-stained-ambient-occlusion.jpg',
-  heightMapUrl: '/textures/glass-stained/glass-stained-height.png',
-  metallicMapUrl: '/textures/glass-stained/glass-stained-metallic.jpg',
-  normalMapUrl: '/textures/glass-stained/glass-stained-normal.jpg',
-  roughnessMapUrl: '/textures/glass-stained/glass-stained-roughness.jpg',
+    "/textures/glass-stained/glass-stained-ambient-occlusion.jpg",
+  heightMapUrl: "/textures/glass-stained/glass-stained-height.png",
+  metallicMapUrl: "/textures/glass-stained/glass-stained-metallic.jpg",
+  normalMapUrl: "/textures/glass-stained/glass-stained-normal.jpg",
+  roughnessMapUrl: "/textures/glass-stained/glass-stained-roughness.jpg",
 });
 
 const materialGlassWindow = createMaterial({
-  colorMapUrl: '/textures/glass-window/glass-window-basecolor.jpg',
-  alphaMapUrl: '/textures/glass-window/glass-window-opacity.jpg',
+  colorMapUrl: "/textures/glass-window/glass-window-basecolor.jpg",
+  alphaMapUrl: "/textures/glass-window/glass-window-opacity.jpg",
   ambientOcclusionUrl:
-    '/textures/glass-window/glass-window-ambient-occlusion.jpg',
-  heightMapUrl: '/textures/glass-window/glass-window-height.png',
-  metallicMapUrl: '/textures/glass-window/glass-window-metallic.jpg',
-  normalMapUrl: '/textures/glass-window/glass-window-normal.jpg',
-  roughnessMapUrl: '/textures/glass-window/glass-window-roughness.jpg',
+    "/textures/glass-window/glass-window-ambient-occlusion.jpg",
+  heightMapUrl: "/textures/glass-window/glass-window-height.png",
+  metallicMapUrl: "/textures/glass-window/glass-window-metallic.jpg",
+  normalMapUrl: "/textures/glass-window/glass-window-normal.jpg",
+  roughnessMapUrl: "/textures/glass-window/glass-window-roughness.jpg",
 });
 
 const materialPaperWrinkled = createMaterial({
-  colorMapUrl: '/textures/paper-wrinkled/paper-wrinkled-basecolor.jpg',
+  colorMapUrl: "/textures/paper-wrinkled/paper-wrinkled-basecolor.jpg",
   alphaMapUrl: null,
   ambientOcclusionUrl:
-    '/textures/paper-wrinkled/paper-wrinkled-ambient-occlusion.jpg',
-  heightMapUrl: '/textures/paper-wrinkled/paper-wrinkled-height.png',
+    "/textures/paper-wrinkled/paper-wrinkled-ambient-occlusion.jpg",
+  heightMapUrl: "/textures/paper-wrinkled/paper-wrinkled-height.png",
   metallicMapUrl: null,
-  normalMapUrl: '/textures/paper-wrinkled/paper-wrinkled-normal.jpg',
-  roughnessMapUrl: '/textures/paper-wrinkled/paper-wrinkled-roughness.jpg',
+  normalMapUrl: "/textures/paper-wrinkled/paper-wrinkled-normal.jpg",
+  roughnessMapUrl: "/textures/paper-wrinkled/paper-wrinkled-roughness.jpg",
 });
 
 const materialSapphire = createMaterial({
-  colorMapUrl: '/textures/sapphire/sapphire-color.jpg',
+  colorMapUrl: "/textures/sapphire/sapphire-color.jpg",
   alphaMapUrl: null,
-  ambientOcclusionUrl: '/textures/sapphire/sapphire-occ.jpg',
-  heightMapUrl: '/textures/sapphire/sapphire-disp.png',
+  ambientOcclusionUrl: "/textures/sapphire/sapphire-occ.jpg",
+  heightMapUrl: "/textures/sapphire/sapphire-disp.png",
   metallicMapUrl: null,
-  normalMapUrl: '/textures/sapphire/sapphire-norm.jpg',
-  roughnessMapUrl: '/textures/sapphire/sapphire-rough.jpg',
+  normalMapUrl: "/textures/sapphire/sapphire-norm.jpg",
+  roughnessMapUrl: "/textures/sapphire/sapphire-rough.jpg",
 });
 
 const materialSkinLizard = createMaterial({
-  colorMapUrl: '/textures/skin-lizard/skin-lizard-basecolor.jpg',
+  colorMapUrl: "/textures/skin-lizard/skin-lizard-basecolor.jpg",
   alphaMapUrl: null,
   ambientOcclusionUrl:
-    '/textures/skin-lizard/skin-lizard-ambient-occlusion.jpg',
-  heightMapUrl: '/textures/skin-lizard/skin-lizard-height.png',
+    "/textures/skin-lizard/skin-lizard-ambient-occlusion.jpg",
+  heightMapUrl: "/textures/skin-lizard/skin-lizard-height.png",
   metallicMapUrl: null,
-  normalMapUrl: '/textures/skin-lizard/skin-lizard-normal.jpg',
-  roughnessMapUrl: '/textures/skin-lizard/skin-lizard-roughness.jpg',
+  normalMapUrl: "/textures/skin-lizard/skin-lizard-normal.jpg",
+  roughnessMapUrl: "/textures/skin-lizard/skin-lizard-roughness.jpg",
 });
 
 const materialStylizedFur = createMaterial({
-  colorMapUrl: '/textures/stylized-fur/stylized-fur-basecolor.jpg',
+  colorMapUrl: "/textures/stylized-fur/stylized-fur-basecolor.jpg",
   alphaMapUrl: null,
   ambientOcclusionUrl:
-    '/textures/stylized-fur/stylized-fur-ambient-occlusion.jpg',
-  heightMapUrl: '/textures/stylized-fur/stylized-fur-height.png',
+    "/textures/stylized-fur/stylized-fur-ambient-occlusion.jpg",
+  heightMapUrl: "/textures/stylized-fur/stylized-fur-height.png",
   metallicMapUrl: null,
-  normalMapUrl: '/textures/stylized-fur/stylized-fur-normal.jpg',
-  roughnessMapUrl: '/textures/stylized-fur/stylized-fur-roughness.jpg',
+  normalMapUrl: "/textures/stylized-fur/stylized-fur-normal.jpg",
+  roughnessMapUrl: "/textures/stylized-fur/stylized-fur-roughness.jpg",
 });
 
 const materialTiles = createMaterial({
-  colorMapUrl: '/textures/tiles/tiles-basecolor.jpg',
+  colorMapUrl: "/textures/tiles/tiles-basecolor.jpg",
   alphaMapUrl: null,
-  ambientOcclusionUrl: '/textures/tiles/tiles-ambient-occlusion.jpg',
-  heightMapUrl: '/textures/tiles/tiles-height.png',
+  ambientOcclusionUrl: "/textures/tiles/tiles-ambient-occlusion.jpg",
+  heightMapUrl: "/textures/tiles/tiles-height.png",
   metallicMapUrl: null,
-  normalMapUrl: '/textures/tiles/tiles-normal.jpg',
-  roughnessMapUrl: '/textures/tiles/tiles-roughness.jpg',
+  normalMapUrl: "/textures/tiles/tiles-normal.jpg",
+  roughnessMapUrl: "/textures/tiles/tiles-roughness.jpg",
 });
 
 export {
@@ -152,6 +148,5 @@ export {
   materialSapphire,
   materialSkinLizard,
   materialStylizedFur,
-  materialTiles
+  materialTiles,
 };
-

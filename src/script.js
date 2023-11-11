@@ -1,45 +1,63 @@
-import debounce from 'lodash/debounce';
-import * as THREE from 'three';
-import TWEEN from 'three/examples/jsm/libs/tween.module';
-import init from './init';
+import debounce from "lodash/debounce";
 import {
-	materialBark,
-	materialDoorWood,
-	materialGlassStained,
-	materialGlassWindow,
-	materialPaperWrinkled,
-	materialSapphire,
-	materialSkinLizard,
-	materialStylizedFur,
-	materialTiles,
-} from './textures';
+  AmbientLight,
+  BoxGeometry,
+  Clock,
+  Color,
+  ConeGeometry,
+  CylinderGeometry,
+  DodecahedronGeometry,
+  Group,
+  Mesh,
+  OctahedronGeometry,
+  Raycaster,
+  SphereGeometry,
+  TetrahedronGeometry,
+  TorusGeometry,
+  TorusKnotGeometry,
+  Vector2,
+  Vector3
+} from "three";
+import TWEEN from "three/examples/jsm/libs/tween.module";
+import init from "./init";
+import {
+  materialBark,
+  materialDoorWood,
+  materialGlassStained,
+  materialGlassWindow,
+  materialPaperWrinkled,
+  materialSapphire,
+  materialSkinLizard,
+  materialStylizedFur,
+  materialTiles
+} from "./textures";
 
-import './style.css';
+import "./style.css";
 
 const { sizes, camera, scene, canvas, controls, renderer, stats, gui } = init();
 
 const lightColor = 0xffffff;
 const lightIntensity = 4;
-const light = new THREE.AmbientLight(lightColor, lightIntensity);
+const light = new AmbientLight(lightColor, lightIntensity);
 
 scene.add(light);
 
-scene.background = new THREE.Color(0x004537);
+scene.background = new Color(0x004537);
 
 camera.position.z = 22;
 
-const figuresGroup = new THREE.Group();
+const figuresGroup = new Group();
 
 const GEOMETRIES = [
-  new THREE.BoxGeometry(1, 1, 1),
-  new THREE.ConeGeometry(1, 2, 16, 4),
-  new THREE.CylinderGeometry(0.75, 1, 2.25, 16, 4),
-  new THREE.TetrahedronGeometry(1, 0),
-  new THREE.TorusGeometry(1, 0.5, 16, 100),
-  new THREE.TorusKnotGeometry(1, 0.25, 100, 16, 1, 5),
-  new THREE.DodecahedronGeometry(1, 0),
-  new THREE.OctahedronGeometry(1, 0),
-  new THREE.SphereGeometry(1, 32, 16),
+  new BoxGeometry(1, 1, 1),
+  new ConeGeometry(1, 2, 16, 4),
+  new CylinderGeometry(0.75, 1, 2.25, 16, 4),
+  new TetrahedronGeometry(1, 0),
+  new TorusGeometry(1, 0.5, 16, 100),
+  new TorusKnotGeometry(1, 0.25, 100, 16, 1, 5),
+  new DodecahedronGeometry(1, 0),
+  new OctahedronGeometry(1, 0),
+  new SphereGeometry(1, 32, 16),
 ];
 
 const TEXTURES = [
@@ -62,7 +80,7 @@ let activeIndex = -1;
 // Создаём и заполняем сетку из массива заданных геометрий
 for (let i = -5; i <= 5; i += 5) {
   for (let j = -5; j <= 5; j += 5) {
-    const mesh = new THREE.Mesh(
+    const mesh = new Mesh(
       GEOMETRIES[geometryIndex],
       TEXTURES[geometryIndex],
     );
@@ -72,24 +90,24 @@ for (let i = -5; i <= 5; i += 5) {
       `${geometryType} [${i}, ${j}] settings`,
     );
 
-    figureGUIFolder.add(mesh, 'visible').name('Is visible?');
+    figureGUIFolder.add(mesh, "visible").name("Is visible?");
     figureGUIFolder
-      .add(mesh.scale, 'x')
+      .add(mesh.scale, "x")
       .min(1)
       .max(4)
       .step(0.25)
-      .name('Scale x');
+      .name("Scale x");
     figureGUIFolder
-      .add(mesh.scale, 'y')
+      .add(mesh.scale, "y")
       .min(1)
       .max(4)
       .step(0.25)
-      .name('Scale y');
+      .name("Scale y");
 
     mesh.position.set(i, j, 10);
     mesh.geometry.attributes.uv2 = mesh.geometry.attributes.uv;
     mesh.currentIndex = geometryIndex;
-    mesh.basicPosition = new THREE.Vector3(i, j, 10);
+    mesh.basicPosition = new Vector3(i, j, 10);
     figuresGroup.add(mesh);
 
     geometryIndex += 1;
@@ -103,11 +121,11 @@ const resetActiveFigure = () => {
   // При помощи GSAP анимируем приближение выбранной фигуры
   new TWEEN.Tween(figuresGroup.children[activeIndex].position)
     .to(
-    {
-      x: figuresGroup.children[activeIndex].basicPosition.x,
+      {
+        x: figuresGroup.children[activeIndex].basicPosition.x,
         y: figuresGroup.children[activeIndex].basicPosition.y,
-      z: figuresGroup.children[activeIndex].basicPosition.z,
-    },
+        z: figuresGroup.children[activeIndex].basicPosition.z,
+      },
       Math.random() * 1000 + 500,
     )
     .easing(TWEEN.Easing.Exponential.InOut)
@@ -115,7 +133,7 @@ const resetActiveFigure = () => {
   activeIndex = -1;
 };
 
-const clock = new THREE.Clock();
+const clock = new Clock();
 
 const tick = () => {
   stats.begin();
@@ -140,9 +158,9 @@ tick();
 // Таким образом, нам нужен функционал Raycaster https://threejs.org/docs/#api/en/core/Raycaster
 // TODO: доработать ограничение клика при нажатии на объект в центре:
 // если есть активный,убирать его, если нет активного — выбирать центральный
-const raycaster = new THREE.Raycaster();
+const raycaster = new Raycaster();
 const handleFigureClick = (event) => {
-  const pointer = new THREE.Vector2();
+  const pointer = new Vector2();
   // Нормализуем значения координат курсора
   pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
   pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -164,11 +182,11 @@ const handleFigureClick = (event) => {
     // При помощи GSAP анимируем приближение выбранной фигуры
     new TWEEN.Tween(figure.object.position)
       .to(
-      {
-        x: 0,
-        y: 0,
-        z: 18,
-      },
+        {
+          x: 0,
+          y: 0,
+          z: 18,
+        },
         Math.random() * 1000 + 500,
       )
       .easing(TWEEN.Easing.Exponential.InOut)
@@ -176,13 +194,13 @@ const handleFigureClick = (event) => {
   });
 };
 
-window.addEventListener('click', handleFigureClick);
+window.addEventListener("click", handleFigureClick);
 
 // TODO: добавить кнопочку 'reset' для возвращения сцены к дефолтному состоянию
 
 /** Базовые обработчики событий для поддержки ресайза */
 window.addEventListener(
-  'resize',
+  "resize",
   debounce(() => {
     // Обновляем размеры
     sizes.width = window.innerWidth;
@@ -200,7 +218,7 @@ window.addEventListener(
 );
 
 window.addEventListener(
-  'dblclick',
+  "dblclick",
   debounce(() => {
     if (!document.fullscreenElement) {
       canvas.requestFullscreen();
